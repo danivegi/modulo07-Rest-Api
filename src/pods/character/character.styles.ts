@@ -21,3 +21,7 @@ export const card = css`
 export const image = css`
   max-width: 300px;
 `;
+
+export const content = css`
+  flex: 1;
+`;

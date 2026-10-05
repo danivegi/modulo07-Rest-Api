@@ -19,8 +19,21 @@ export const CharacterContainer: React.FunctionComponent = () => {
 
   const handleBack = () => navigate(linkRoutes.characterCollection);
 
+  const handleSaveBestSentence = async (bestSentence: string) => {
+    try {
+      await api.updateBestSentence(id, bestSentence);
+      setCharacter({ ...character, bestSentence });
+    } catch {
+      alert('Error al guardar la frase');
+    }
+  };
+
   return character ? (
-    <CharacterComponent character={character} onBack={handleBack} />
+    <CharacterComponent
+      character={character}
+      onBack={handleBack}
+      onSaveBestSentence={handleSaveBestSentence}
+    />
   ) : (
     <p>Cargando...</p>
   );

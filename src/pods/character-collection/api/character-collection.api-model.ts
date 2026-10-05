@@ -14,11 +14,11 @@ export interface CharacterEntityApi {
 }
 
 export interface CharacterCollectionApi {
-  info: {
+    info: {
     count: number;
-    pages: number;
-    next: string | null;
-    prev: string | null;
+    pages?: number;
+    next?: string | null;
+    prev?: string | null;
   };
   results: CharacterEntityApi[];
 }

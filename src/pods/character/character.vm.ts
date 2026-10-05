@@ -9,4 +9,5 @@ export interface Character {
   origin: string;
   location: string;
   episodeCount: number;
+  bestSentence: string;
 }

@@ -14,4 +14,5 @@ export const mapCharacterFromApiToVm = (
   origin: character.origin.name,
   location: character.location.name,
   episodeCount: character.episode.length,
+  bestSentence: character.bestSentence ?? '',
 });

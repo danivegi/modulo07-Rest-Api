@@ -8,3 +8,10 @@ export const getCharacter = async (id: string): Promise<CharacterApi> => {
   );
   return data;
 };
+
+export const updateBestSentence = async (
+  id: string,
+  bestSentence: string
+): Promise<void> => {
+  await axios.put(`${baseApiUrl}/character/${id}`, { bestSentence });
+};

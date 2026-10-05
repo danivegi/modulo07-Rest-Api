@@ -1,1 +1,1 @@
-export const baseApiUrl = 'https://rickandmortyapi.com/api';
+export const baseApiUrl = 'http://localhost:3000/api';
