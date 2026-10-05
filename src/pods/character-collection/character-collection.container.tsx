@@ -1,32 +1,24 @@
 import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { linkRoutes } from '#core/router';
-import { deleteHotel } from './api';
-import { useHotelCollection } from './character-collection.hook';
-import { HotelCollectionComponent } from './character-collection.component';
+import { useCharacterCollection } from './character-collection.hook';
+import { CharacterCollectionComponent } from './character-collection.component';
 
 export const CharacterCollectionContainer = () => {
-  const { hotelCollection, loadHotelCollection } = useHotelCollection();
+  const { characterCollection, loadCharacterCollection } =
+    useCharacterCollection();
   const navigate = useNavigate();
 
   React.useEffect(() => {
-    loadHotelCollection();
+    loadCharacterCollection();
   }, []);
 
-  const handleEdit = (id: string) => {
-    navigate(linkRoutes.character(id));
-  };
-
-  const handleDelete = async (id: string) => {
-    await deleteHotel(id);
-    loadHotelCollection();
-  };
+  const handleSelect = (id: string) => navigate(linkRoutes.character(id));
 
   return (
-    <HotelCollectionComponent
-      hotelCollection={hotelCollection}
-      onEdit={handleEdit}
-      onDelete={handleDelete}
+    <CharacterCollectionComponent
+      characterCollection={characterCollection}
+      onSelect={handleSelect}
     />
   );
 };
