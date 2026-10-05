@@ -1,10 +1,27 @@
-import axios from 'axios';
-import { baseApiUrl } from '#core/api';
+import { graphqlRequest } from '#core/api';
 import { CharacterApi } from './character.api-model';
 
+const query = `
+  query ($id: ID!) {
+    character(id: $id) {
+      id
+      name
+      image
+      status
+      species
+      type
+      gender
+      origin { name }
+      location { name }
+      episode { id }
+    }
+  }
+`;
+
 export const getCharacter = async (id: string): Promise<CharacterApi> => {
-  const { data } = await axios.get<CharacterApi>(
-    `${baseApiUrl}/character/${id}`
+  const { character } = await graphqlRequest<{ character: CharacterApi }>(
+    query,
+    { id }
   );
-  return data;
+  return character;
 };
