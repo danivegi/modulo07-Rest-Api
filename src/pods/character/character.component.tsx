@@ -1,49 +1,47 @@
 import React from 'react';
-import { Formik, Form } from 'formik';
 import Button from '@mui/material/Button';
-import {
-  TextFieldComponent,
-  SelectComponent,
-  RatingComponent,
-} from '#common/components';
-import { Lookup } from '#common/models';
-import { formValidation } from './character.validations';
-import { Hotel } from './character.vm';
+import Card from '@mui/material/Card';
+import CardMedia from '@mui/material/CardMedia';
+import CardContent from '@mui/material/CardContent';
+import Typography from '@mui/material/Typography';
+import { Character } from './character.vm';
 import * as classes from './character.styles';
 
 interface Props {
-  hotel: Hotel;
-  cities: Lookup[];
-  onSave: (hotel: Hotel) => void;
+  character: Character;
+  onBack: () => void;
 }
 
-export const HotelComponent: React.FunctionComponent<Props> = (props) => {
-  const { hotel, cities, onSave } = props;
+export const CharacterComponent: React.FunctionComponent<Props> = (props) => {
+  const { character, onBack } = props;
 
   return (
-    <Formik
-      onSubmit={onSave}
-      initialValues={hotel}
-      enableReinitialize={true}
-      validate={formValidation.validateForm}
-    >
-      {() => (
-        <Form className={classes.root}>
-          <TextFieldComponent name="name" label="Name" />
-          <TextFieldComponent name="address" label="Address" />
-          <RatingComponent name="rating" max={5} />
-          <SelectComponent name="city" label="City" items={cities} />
-          <TextFieldComponent
-            name="description"
-            label="Description"
-            multiline={true}
-            rows={3}
-          />
-          <Button type="submit" variant="contained" color="primary">
-            Save
-          </Button>
-        </Form>
-      )}
-    </Formik>
+    <div className={classes.root}>
+      <Button variant="outlined" onClick={onBack}>
+        Volver
+      </Button>
+      <Card className={classes.card}>
+        <CardMedia
+          component="img"
+          image={character.image}
+          alt={character.name}
+          className={classes.image}
+        />
+        <CardContent>
+          <Typography variant="h4" component="h1" gutterBottom>
+            {character.name}
+          </Typography>
+          <Typography><strong>Estado:</strong> {character.status}</Typography>
+          <Typography><strong>Especie:</strong> {character.species}</Typography>
+          {character.type && (
+            <Typography><strong>Tipo:</strong> {character.type}</Typography>
+          )}
+          <Typography><strong>Género:</strong> {character.gender}</Typography>
+          <Typography><strong>Origen:</strong> {character.origin}</Typography>
+          <Typography><strong>Ubicación:</strong> {character.location}</Typography>
+          <Typography><strong>Episodios:</strong> {character.episodeCount}</Typography>
+        </CardContent>
+      </Card>
+    </div>
   );
 };

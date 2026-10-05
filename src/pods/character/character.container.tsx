@@ -1,43 +1,27 @@
 import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { linkRoutes } from '#core/router';
 import * as api from './api';
-import { createEmptyHotel, Hotel } from './character.vm';
-import { mapHotelFromApiToVm, mapHotelFromVmToApi } from './character.mappers';
-import { Lookup } from '#common/models';
-import { HotelComponent } from './character.component';
+import { Character } from './character.vm';
+import { mapCharacterFromApiToVm } from './character.mappers';
+import { CharacterComponent } from './character.component';
 
-export const CharacterContainer: React.FunctionComponent = (props) => {
-  const [hotel, setHotel] = React.useState<Hotel>(createEmptyHotel());
-  const [cities, setCities] = React.useState<Lookup[]>([]);
+export const CharacterContainer: React.FunctionComponent = () => {
+  const [character, setCharacter] = React.useState<Character>(null);
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
 
-  const handleLoadCityCollection = async () => {
-    const apiCities = await api.getCities();
-    setCities(apiCities);
-  };
-
-  const handleLoadHotel = async () => {
-    const apiHotel = await api.getHotel(id);
-    setHotel(mapHotelFromApiToVm(apiHotel));
-  };
-
   React.useEffect(() => {
-    if (id) {
-      handleLoadHotel();
-    }
-    handleLoadCityCollection();
-  }, []);
+    api
+      .getCharacter(id)
+      .then((apiCharacter) => setCharacter(mapCharacterFromApiToVm(apiCharacter)));
+  }, [id]);
 
-  const handleSave = async (hotel: Hotel) => {
-    const apiHotel = mapHotelFromVmToApi(hotel);
-    const success = await api.saveHotel(apiHotel);
-    if (success) {
-      navigate(-1);
-    } else {
-      alert('Error on save hotel');
-    }
-  };
+  const handleBack = () => navigate(linkRoutes.characterCollection);
 
-  return <HotelComponent hotel={hotel} cities={cities} onSave={handleSave} />;
+  return character ? (
+    <CharacterComponent character={character} onBack={handleBack} />
+  ) : (
+    <p>Cargando...</p>
+  );
 };
