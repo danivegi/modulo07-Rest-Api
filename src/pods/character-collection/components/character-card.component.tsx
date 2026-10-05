@@ -9,8 +9,8 @@ import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { HotelEntityVm } from '../hotel-collection.vm';
-import * as classes from './hotel-card.styles';
+import { HotelEntityVm } from '../character-collection.vm';
+import * as classes from './character-card.styles';
 
 interface Props {
   hotel: HotelEntityVm;

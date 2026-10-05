@@ -2,10 +2,10 @@ import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { linkRoutes } from '#core/router';
 import { deleteHotel } from './api';
-import { useHotelCollection } from './hotel-collection.hook';
-import { HotelCollectionComponent } from './hotel-collection.component';
+import { useHotelCollection } from './character-collection.hook';
+import { HotelCollectionComponent } from './character-collection.component';
 
-export const HotelCollectionContainer = () => {
+export const CharacterCollectionContainer = () => {
   const { hotelCollection, loadHotelCollection } = useHotelCollection();
   const navigate = useNavigate();
 
@@ -13,12 +13,8 @@ export const HotelCollectionContainer = () => {
     loadHotelCollection();
   }, []);
 
-  const handleCreateHotel = () => {
-    navigate(linkRoutes.createHotel);
-  };
-
   const handleEdit = (id: string) => {
-    navigate(linkRoutes.editHotel(id));
+    navigate(linkRoutes.character(id));
   };
 
   const handleDelete = async (id: string) => {
@@ -29,7 +25,6 @@ export const HotelCollectionContainer = () => {
   return (
     <HotelCollectionComponent
       hotelCollection={hotelCollection}
-      onCreateHotel={handleCreateHotel}
       onEdit={handleEdit}
       onDelete={handleDelete}
     />

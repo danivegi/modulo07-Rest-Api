@@ -1,4 +1,4 @@
-import { Hotel } from './hotel.api-model';
+import { Hotel } from './character.api-model';
 import { Lookup } from '#common/models';
 
 export const mockHotelCollection: Hotel[] = [
