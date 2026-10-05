@@ -9,12 +9,16 @@ export const useCharacterCollection = () => {
     CharacterEntityVm[]
   >([]);
   const [totalPages, setTotalPages] = React.useState(0);
+  const [isLoading, setIsLoading] = React.useState(true);
 
-  const loadCharacterCollection = (page: number) =>
-    getCharacterCollection(page).then(({ info, results }) => {
+  const loadCharacterCollection = (page: number, name: string) => {
+    setIsLoading(true);
+    return getCharacterCollection(page, name).then(({ info, results }) => {
       setCharacterCollection(mapToCollection(results, mapFromApiToVm));
       setTotalPages(info.pages);
+      setIsLoading(false);
     });
+  };
 
-  return { characterCollection, totalPages, loadCharacterCollection };
+  return { characterCollection, totalPages, isLoading, loadCharacterCollection };
 };
