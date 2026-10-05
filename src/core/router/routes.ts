@@ -4,12 +4,14 @@ interface SwitchRoutes {
   root: string;
   characterCollection: string;
   character: string;
+  locationCollection: string;
 }
 
 export const switchRoutes: SwitchRoutes = {
   root: '/',
   characterCollection: '/characters',
   character: '/characters/:id',
+  locationCollection: '/locations',
 };
 
 type NavigationFunction = (id: string) => string;
