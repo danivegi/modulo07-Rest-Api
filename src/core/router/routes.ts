@@ -5,6 +5,7 @@ interface SwitchRoutes {
   characterCollection: string;
   character: string;
   locationCollection: string;
+  episodeCollection: string;
 }
 
 export const switchRoutes: SwitchRoutes = {
@@ -12,6 +13,7 @@ export const switchRoutes: SwitchRoutes = {
   characterCollection: '/characters',
   character: '/characters/:id',
   locationCollection: '/locations',
+  episodeCollection: '/episodes',
 };
 
 type NavigationFunction = (id: string) => string;

@@ -31,6 +31,13 @@ export const AppLayout: React.FC<Props> = (props) => {
           >
             Lugares
           </Button>
+          <Button
+            color="inherit"
+            component={RouterLink}
+            to={linkRoutes.episodeCollection}
+          >
+            Episodios
+          </Button>
         </Toolbar>
       </AppBar>
       <main className={classes.content}>{children}</main>
