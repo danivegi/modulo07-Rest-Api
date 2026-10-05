@@ -1,8 +1,9 @@
 import React from 'react';
+import { Link as RouterLink } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import AccountCircle from '@mui/icons-material/AccountCircle';
+import Button from '@mui/material/Button';
+import { linkRoutes } from '#core/router';
 import * as classes from './app.layout.styles';
 
 interface Props {
@@ -16,9 +17,27 @@ export const AppLayout: React.FC<Props> = (props) => {
     <>
       <AppBar position="static">
         <Toolbar variant="dense">
-          <IconButton color="inherit" aria-label="Menu">
-            <AccountCircle />
-          </IconButton>
+          <Button
+            color="inherit"
+            component={RouterLink}
+            to={linkRoutes.characterCollection}
+          >
+            Personajes
+          </Button>
+          <Button
+            color="inherit"
+            component={RouterLink}
+            to={linkRoutes.locationCollection}
+          >
+            Lugares
+          </Button>
+          <Button
+            color="inherit"
+            component={RouterLink}
+            to={linkRoutes.episodeCollection}
+          >
+            Episodios
+          </Button>
         </Toolbar>
       </AppBar>
       <main className={classes.content}>{children}</main>
